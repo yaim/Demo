@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Auth'], function ($router) {
     $router->middleware('auth')->get('/auth/successful-attempts', 'SuccessfulAttemptController@index');
 });
+
+Route::group(['namespace' => 'Auth'], function ($router) {
+    $router->middleware('auth')->get('/auth/successful-attempts', 'SuccessfulAttemptController@index');
+});

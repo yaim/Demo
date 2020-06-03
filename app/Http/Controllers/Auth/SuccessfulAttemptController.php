@@ -10,7 +10,8 @@ class SuccessfulAttemptController extends Controller
     public function index()
     {
         $attempts = auth()->user()
-            ->successfulLoginAttempts()
+            ->loginAttempts()
+            ->where('successful', 1)
             ->orderBy('attempted_at', 'desc')
             ->take(5)
             ->get();

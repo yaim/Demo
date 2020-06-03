@@ -49,7 +49,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function successfulLoginAttempts()
+    public function loginAttempts()
     {
         return $this->hasMany(LoginAttempt::class);
     }

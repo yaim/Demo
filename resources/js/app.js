@@ -5,7 +5,16 @@
  */
 
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
 import App from './pages/App'
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [],
+});
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,4 +38,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
     components: { App },
+    router,
 });

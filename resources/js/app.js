@@ -6,12 +6,15 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueMoment from 'vue-moment'
 
 Vue.use(VueRouter)
+Vue.use(VueMoment)
 
 import App from './pages/App'
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
+import Dashboard from './pages/Dashboard'
 
 const router = new VueRouter({
     mode: 'history',
@@ -25,6 +28,11 @@ const router = new VueRouter({
             path: '/auth/register',
             name: 'register',
             component: Register,
+        },
+        {
+            path: '/dashboard',
+            name: 'dashboard',
+            component: Dashboard,
         },
     ],
 });

@@ -56,6 +56,10 @@
                 })
                 .then(response => {
                     const token = response.data.data.access_token;
+
+                    localStorage.setItem('token', token);
+
+                    this.$router.push({name: 'dashboard'});
                 })
                 .catch(error => {
                     Object.values(

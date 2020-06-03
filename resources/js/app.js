@@ -10,10 +10,23 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import App from './pages/App'
+import Register from './pages/auth/Register'
+import Login from './pages/auth/Login'
 
 const router = new VueRouter({
     mode: 'history',
-    routes: [],
+    routes: [
+        {
+            path: '/auth/login',
+            name: 'login',
+            component: Login
+        },
+        {
+            path: '/auth/register',
+            name: 'register',
+            component: Register,
+        },
+    ],
 });
 
 /**

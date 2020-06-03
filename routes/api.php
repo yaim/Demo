@@ -13,8 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'Auth'], function ($router) {
-    $router->middleware('auth')->get('/auth/successful-attempts', 'SuccessfulAttemptController@index');
+Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function ($router) {
+    $router->group(['middleware' => 'guest'], function ($router) {
+        $router->post('register', 'UserController@store');
+        $router->post('login', 'AuthController@store');
+    });
+
+    $router->group(['middleware' => 'auth'], function ($router) {
+        $router->get('user', 'UserController@get');
+        $router->get('successful-attempts', 'SuccessfulAttemptController@index');
+    });
 });
 
 Route::group(['namespace' => 'Auth'], function ($router) {

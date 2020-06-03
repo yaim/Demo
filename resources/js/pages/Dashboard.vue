@@ -51,7 +51,7 @@
                 this.logs = response.data.data
             })
             .catch(error => {
-                localStorage.setItem('token', null);
+                localStorage.removeItem('token');
 
                 this.$router.push({name: 'login'});
             });

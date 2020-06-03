@@ -59,6 +59,7 @@
 
                     localStorage.setItem('token', token);
 
+                    this.$store.commit('fetchUser');
                     this.$router.push({name: 'dashboard'});
                 })
                 .catch(error => {

@@ -5,15 +5,18 @@
  */
 
 import Vue from 'vue'
+import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import VueMoment from 'vue-moment'
 
 Vue.use(VueRouter)
+Vue.use(Vuex)
 Vue.use(VueMoment)
 
 import App from './pages/App'
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
+import Logout from './pages/auth/Logout'
 import Dashboard from './pages/Dashboard'
 
 const router = new VueRouter({
@@ -33,6 +36,15 @@ const router = new VueRouter({
             path: '/dashboard',
             name: 'dashboard',
             component: Dashboard,
+        },
+        {
+            path: '/logout',
+            name: 'logout',
+            component: Logout,
+        },
+        {
+            path: '*',
+            redirect: '/dashboard'
         },
     ],
 });
@@ -54,8 +66,41 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+const axios = require('axios');
+
+const store = new Vuex.Store({
+    state: {
+        user: null
+    },
+    mutations: {
+        fetchUser (state) {
+            const token = localStorage.getItem('token');
+
+            axios.get('/api/auth/user', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                state.user = response.data.data
+            })
+            .catch(error => {
+                state.user = null
+            });
+        },
+        logout (state) {
+            localStorage.removeItem('token');
+
+            state.user = null
+        },
+    }
+})
+
+store.commit('fetchUser');
+
 const app = new Vue({
     el: '#app',
     components: { App },
     router,
+    store,
 });
